@@ -1,0 +1,47 @@
+{
+  "name": "@trade-bot/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./connections": {
+      "types": "./dist/connections/index.d.ts",
+      "import": "./dist/connections/index.js"
+    },
+    "./schema": {
+      "types": "./dist/schema/index.d.ts",
+      "import": "./dist/schema/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "check-types": "tsc -b",
+    "db:generate": "tsx node_modules/drizzle-kit/bin.cjs generate",
+    "db:validate": "bun scripts/validate-migrations.ts",
+    "db:migrate": "dotenv -e ../../apps/worker/.env -- bun scripts/run-drizzle.ts migrate",
+    "db:migrate:production": "bun scripts/run-drizzle.ts migrate",
+    "db:verify-worker-schema": "bun scripts/verify-worker-schema.ts",
+    "db:push": "dotenv -e ../../apps/worker/.env -- bun scripts/run-drizzle.ts push",
+    "db:studio": "dotenv -e ../../apps/worker/.env -- bun scripts/run-drizzle.ts studio"
+  },
+  "dependencies": {
+    "@trade-bot/utils": "workspace:*",
+    "@vercel/functions": "^3.1.4",
+    "drizzle-orm": "^0.31.2",
+    "drizzle-zod": "^0.5.1",
+    "pg": "^8.16.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.5",
+    "drizzle-kit": "^0.22.7",
+    "tsx": "^4.15.6",
+    "typescript": "^5.7.3"
+  }
+}

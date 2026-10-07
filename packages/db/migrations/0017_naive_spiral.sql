@@ -1,0 +1,1 @@
+ALTER TABLE "chat_conversations" ADD COLUMN "tenant_private_data_seen" boolean DEFAULT false NOT NULL;

@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS "signals_legacy_normalized_author_timestamp_idx" ON "signals" USING btree (lower(regexp_replace(regexp_replace(btrim(coalesce(substring("metadata" #>> '{}' from '"authorName"\s*:\s*"([^"\\]+)"'), '')), '\s*[•·|–-]\s*TweetShift\s*$', '', 'i'), '\s+', ' ', 'g')),"timestamp" DESC NULLS LAST) WHERE jsonb_typeof("signals"."metadata") = 'string';

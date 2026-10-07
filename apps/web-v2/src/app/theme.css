@@ -1,0 +1,222 @@
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.67 0.16 58);
+  --primary-foreground: oklch(0.99 0.02 95);
+  --secondary: oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.88 0.15 92);
+  --chart-2: oklch(0.77 0.16 70);
+  --chart-3: oklch(0.67 0.16 58);
+  --chart-4: oklch(0.56 0.15 49);
+  --chart-5: oklch(0.47 0.12 46);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.67 0.16 58);
+  --sidebar-primary-foreground: oklch(0.99 0.02 95);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Institutional terminal surfaces. These alias the active brand palette so
+     brand-tokens.css can continue to own the actual light/dark colors. */
+  --surface-canvas: var(--background);
+  --surface-pane: var(--card);
+  --surface-command: var(--popover);
+  --surface-floating: color-mix(in oklab, var(--popover) 92%, var(--card));
+  --surface-hover: color-mix(in oklab, var(--accent) 64%, var(--surface-pane));
+  --surface-active: color-mix(in oklab, var(--primary) 12%, var(--surface-pane));
+  --surface-border: color-mix(in oklab, var(--border) 92%, transparent);
+  --surface-border-strong: color-mix(in oklab, var(--border) 82%, var(--foreground));
+  --surface-pane-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.72),
+    0 1px 2px rgb(12 21 30 / 0.06);
+  --surface-command-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.78),
+    0 8px 24px -18px rgb(12 21 30 / 0.28);
+  --surface-floating-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.84),
+    0 18px 48px -24px rgb(12 21 30 / 0.38);
+
+  /* Glass is reserved for compact chrome such as command bars and menus. */
+  --glass-command-background: color-mix(in srgb, var(--surface-command) 90%, transparent);
+  --glass-floating-background: color-mix(in srgb, var(--surface-floating) 94%, transparent);
+  --glass-border: color-mix(in oklab, var(--border) 82%, transparent);
+  --glass-command-blur: 10px;
+  --glass-floating-blur: 14px;
+
+  --focus-ring-color: var(--ring);
+  --price-up-flash: color-mix(in srgb, var(--color-green-500, #157a52) 14%, transparent);
+  --price-down-flash: color-mix(in srgb, var(--color-red-500, #c0432f) 14%, transparent);
+
+  --duration-fast: 80ms;
+  --duration-ui: 140ms;
+  --duration-panel: 220ms;
+  --easing-ui: cubic-bezier(0.2, 0, 0, 1);
+  --easing-panel: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-fast: var(--duration-fast);
+  --motion-ui: var(--duration-ui);
+  --motion-panel: var(--duration-panel);
+  --ease-terminal: var(--easing-ui);
+  --ease-terminal-panel: var(--easing-panel);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.77 0.16 70);
+  --primary-foreground: oklch(0.28 0.07 46);
+  --secondary: oklch(0.274 0.006 286.033);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.371 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  /* --border, --input and --sidebar-border are owned by brand-tokens.css
+     (loaded after this file); defining them here too made the winner depend on
+     import order, so each is set once there. */
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.88 0.15 92);
+  --chart-2: oklch(0.77 0.16 70);
+  --chart-3: oklch(0.67 0.16 58);
+  --chart-4: oklch(0.56 0.15 49);
+  --chart-5: oklch(0.47 0.12 46);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.77 0.16 70);
+  --sidebar-primary-foreground: oklch(0.28 0.07 46);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-ring: oklch(0.556 0 0);
+
+  --surface-canvas: #040d14;
+  --surface-pane: #081720;
+  /* Command band sits a visible step above the pane; the old #0a1923 was a
+     delta of rgb(2,2,3) from the pane and read as the same color. */
+  --surface-command: #0c1d28;
+  --surface-floating: #0d202b;
+  /* Translucent hover/active read identically over every surface step, and
+     the active state stays neutral: gold is reserved for states that MEAN
+     selection or brand (active tab, chosen chip, submit CTA, focus ring). */
+  --surface-hover: rgb(164 200 222 / 0.06);
+  --surface-active: rgb(164 200 222 / 0.07);
+  --surface-border: rgb(164 200 222 / 0.10);
+  --surface-border-strong: rgb(164 200 222 / 0.20);
+  /* Dark depth comes from background steps plus hairlines; only floating
+     overlays keep a shadow. Light keeps its elevation language. */
+  --surface-pane-shadow: none;
+  --surface-command-shadow: none;
+  --surface-floating-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.055),
+    0 22px 56px -24px rgb(0 0 0 / 0.86);
+  --glass-command-background: rgb(10 25 35 / 0.96);
+  --glass-floating-background: rgb(13 32 43 / 0.94);
+  --glass-border: rgb(164 200 222 / 0.14);
+  --terminal-edge-highlight: rgb(255 255 255 / 0.045);
+  --terminal-gold-wash: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0.01ms;
+    --duration-ui: 0.01ms;
+    --duration-panel: 0.01ms;
+  }
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", sans-serif;
+  --color-surface-canvas: var(--surface-canvas);
+  --color-surface-pane: var(--surface-pane);
+  --color-surface-command: var(--surface-command);
+  --color-surface-floating: var(--surface-floating);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-active: var(--surface-active);
+  --color-surface-border: var(--surface-border);
+  --color-surface-border-strong: var(--surface-border-strong);
+  --color-glass-command: var(--glass-command-background);
+  --color-glass-floating: var(--glass-floating-background);
+  --color-glass-border: var(--glass-border);
+  --color-focus-ring: var(--focus-ring-color);
+  --color-price-up-flash: var(--price-up-flash);
+  --color-price-down-flash: var(--price-down-flash);
+  --shadow-pane: var(--surface-pane-shadow);
+  --shadow-command: var(--surface-command-shadow);
+  --shadow-floating: var(--surface-floating-shadow);
+  --blur-command: var(--glass-command-blur);
+  --blur-floating: var(--glass-floating-blur);
+  --transition-duration-fast: var(--duration-fast);
+  --transition-duration-ui: var(--duration-ui);
+  --transition-duration-panel: var(--duration-panel);
+  --ease-ui: var(--easing-ui);
+  --ease-panel: var(--easing-panel);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-foreground-2: var(--muted-foreground-2);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  /* Micro-label sizes: the only sanctioned sub-12px steps. Prefer these over
+     arbitrary text-[Npx] values so density stays on a two-step scale. */
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-3xs: 0.625rem;
+  --text-3xs--line-height: 0.875rem;
+  /* Gold alpha ramp: backgrounds use these three tints; borders use
+     border-primary/25 and border-primary/45 only. No ad-hoc gold alphas. */
+  --color-primary-tint-1: color-mix(in srgb, var(--primary) 8%, transparent);
+  --color-primary-tint-2: color-mix(in srgb, var(--primary) 16%, transparent);
+  --color-primary-tint-3: color-mix(in srgb, var(--primary) 28%, transparent);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}

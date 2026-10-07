@@ -1,0 +1,156 @@
+/**
+ * Ready Set Trade - brand tokens (Tailwind v4)
+ *
+ * Generated from DESIGN.md (repo root). These are ADDITIVE and namespaced so they
+ * don't clobber the existing shadcn/oklch theme in theme.css. They expose utilities
+ * like `bg-gold`, `text-gain`, `text-loss`, `bg-charcoal`, `font-wordmark`, etc.
+ *
+ * Imported by globals.css after theme.css. Remove that @import to opt out.
+ */
+
+@theme {
+  /* Brand core */
+  --color-charcoal: #161d26;
+  --color-charcoal-deep: #0c151e;
+  --color-gold: #c59a3e;
+  --color-gold-hi: #ca9d3e; /* metallic highlight / focus ring */
+  --color-gold-lo: #c19436; /* gold hover / pressed */
+  --color-gold-soft: #e7d9b4; /* pale gold tint for badges */
+  --color-gold-bright: #d2a851; /* brighter gold for the charcoal landing world */
+  --color-cream: #f4f1ea; /* warm cream ink on charcoal (landing + emblem face) */
+  --color-muted-slate: #9aa4b2; /* secondary text on charcoal (landing) */
+
+  /* Trading semantics (AA on white) */
+  --color-gain: #157a52;
+  --color-gain-soft: #d7efe4;
+  --color-loss: #c0432f;
+  --color-loss-soft: #f6d9d2;
+
+  /* Neutrals */
+  --color-rst-surface: #f7f5f0; /* warm panel */
+  --color-rst-line: #d9d5cc; /* hairline divider */
+  --color-rst-muted: #3a4350; /* secondary text */
+
+  /* Brand type. Keep local/offline so Next route compilation does not fetch Google fonts. */
+  --font-wordmark: "Sora Variable", ui-sans-serif, sans-serif;
+  --font-display: "Sora Variable", "Inter Variable", ui-sans-serif, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Direction tints: solid color as text over a 15% wash of the same color.
+     green-500/red-500 are redefined per theme, so these resolve in both. */
+  --color-gain-tint: color-mix(in srgb, var(--color-green-500) 15%, transparent);
+  --color-loss-tint: color-mix(in srgb, var(--color-red-500) 15%, transparent);
+}
+
+/* ------------------------------------------------------------------
+ * Brand application - maps the full DESIGN.md palette onto shadcn's
+ * CSS variables (light + dark). Loaded after theme.css, so these win.
+ * Delete the @import in globals.css to fully revert.
+ * ---------------------------------------------------------------- */
+:root {
+  /* Surfaces - white bg, warm off-white panels, charcoal ink */
+  --background: #ffffff;          /* DESIGN: background */
+  --foreground: #0c151e;          /* on-background */
+  --card: #f7f5f0;                /* surface-container (warm panel) */
+  --card-foreground: #161d26;     /* on-surface */
+  --popover: #ffffff;
+  --popover-foreground: #161d26;
+
+  /* Accent → brand antique gold (dark text on it) */
+  --primary: #c59a3e;             /* secondary (gold) */
+  --primary-foreground: #0c151e;
+  --ring: #c59a3e;
+
+  /* Neutral + gold-tinted accents */
+  --secondary: #efebe2;           /* surface-container-high */
+  --secondary-foreground: #161d26;
+  --muted: #f2efe8;
+  --muted-foreground: #3a4350;    /* on-surface-variant */
+  --muted-foreground-2: #6b6659;  /* tertiary labels; 4.8:1+ on every light surface */
+  --accent: #e7d9b4;              /* secondary-container (gold tint) → hovers */
+  --accent-foreground: #3d2f0e;   /* on-secondary-container */
+  --destructive: #c0432f;         /* negative */
+
+  /* Lines */
+  --border: #d9d5cc;              /* outline-variant */
+  --input: #d9d5cc;
+
+  /* Charts - brand-cohesive */
+  --chart-1: #c59a3e;             /* gold */
+  --chart-2: #157a52;             /* gain */
+  --chart-3: #c0432f;             /* loss */
+  --chart-4: #3a4350;             /* slate */
+  --chart-5: #c19436;             /* gold shadow */
+
+  /* Sidebar */
+  --sidebar: #f7f5f0;
+  --sidebar-foreground: #161d26;
+  --sidebar-primary: #c59a3e;
+  --sidebar-primary-foreground: #0c151e;
+  --sidebar-accent: #e7d9b4;
+  --sidebar-accent-foreground: #3d2f0e;
+  --sidebar-border: #d9d5cc;
+  --sidebar-ring: #c59a3e;
+
+  /* Gains / losses → brand, AA on white */
+  --color-green-400: #1f9d6b;
+  --color-green-500: #157a52;
+  --color-green-600: #11633f;
+  --color-red-400: #d0543f;
+  --color-red-500: #c0432f;
+  --color-red-600: #9f3623;
+}
+
+.dark {
+  /* Terminal-dark surfaces: blue-black canvas with quiet, crisp depth. */
+  --background: #040d14;
+  --foreground: #edf2f3;
+  --card: #081720;
+  --card-foreground: #edf2f3;
+  --popover: #0d202b;
+  --popover-foreground: #edf2f3;
+
+  /* Brighter gold so the accent stays vivid on charcoal */
+  --primary: #d8b35a;
+  --primary-foreground: #07131b;
+  --ring: #d8b35a;
+
+  --secondary: #102430;
+  --secondary-foreground: #edf2f3;
+  --muted: #0d1e28;
+  --muted-foreground: #91a4b3;
+  --muted-foreground-2: #7a8fa0; /* tertiary labels; 5.4:1 on --surface-pane */
+  --accent: #112a37;
+  --accent-foreground: #f4f7f7;
+  --destructive: #ed6a64;
+
+  /* Translucent hairlines (muted-foreground hue family) read as etched into
+     the surface instead of boxes drawn on top; they also adapt to every
+     background step for free. Input edge is stronger for the 3:1 non-text
+     contrast floor on form controls. */
+  --border: rgb(164 200 222 / 0.10);
+  --input: rgb(164 200 222 / 0.45);
+
+  --chart-1: #d8b35a;
+  --chart-2: #43d39a;
+  --chart-3: #ed6a64;
+  --chart-4: #91a4b3;
+  --chart-5: #caa24b;
+
+  --sidebar: #06131c;
+  --sidebar-foreground: #edf2f3;
+  --sidebar-primary: #d8b35a;
+  --sidebar-primary-foreground: #07131b;
+  --sidebar-accent: #112a37;
+  --sidebar-accent-foreground: #edf2f3;
+  --sidebar-border: var(--border);
+  --sidebar-ring: #d8b35a;
+
+  /* Lighter gain/loss for legibility on dark surfaces */
+  --color-green-400: #52e1aa;
+  --color-green-500: #43d39a;
+  --color-green-600: #2eac7b;
+  --color-red-400: #f1847d;
+  --color-red-500: #ed6a64;
+  --color-red-600: #d3524c;
+}

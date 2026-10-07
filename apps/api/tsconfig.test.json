@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "noUnusedLocals": false,
+    "types": ["bun"]
+  },
+  "include": ["src/__tests__"],
+  "exclude": ["node_modules", "dist"]
+}

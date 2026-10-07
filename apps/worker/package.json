@@ -1,0 +1,36 @@
+{
+  "name": "@trade-bot/worker",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "bunx tsdown",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "check-types": "bun run typecheck",
+    "dev": "bun run --hot src/index.ts",
+    "start": "bun run src/index.ts",
+    "start:production": "bun run dist/index.js",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@sentry/node": "^10.71.0",
+    "@trade-bot/alpaca": "workspace:*",
+    "@trade-bot/db": "workspace:*",
+    "@trade-bot/hyperliquid": "workspace:*",
+    "@trade-bot/logger": "workspace:*",
+    "@trade-bot/pnl-image": "workspace:*",
+    "@trade-bot/redis": "workspace:*",
+    "@trade-bot/types": "workspace:*",
+    "@trade-bot/utils": "workspace:*",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.31.2",
+    "hono": "^4.9.6",
+    "ioredis": "^5.4.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.21",
+    "tsdown": "^0.15.0",
+    "typescript": "^5.9.2"
+  }
+}

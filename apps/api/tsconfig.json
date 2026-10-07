@@ -1,0 +1,59 @@
+{
+  "compilerOptions": {
+    /* Base Options: */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    /* If transpiling with TypeScript: */
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "outDir": "dist",
+    "sourceMap": true,
+
+    /* Paths */
+    "baseUrl": "./",
+    "paths": {
+      "@trade-bot/db": ["../../packages/db/src/index.ts"],
+      "@trade-bot/db/*": ["../../packages/db/src/*"],
+      "@trade-bot/utils": ["../../packages/utils/src/index.ts"],
+      "@trade-bot/utils/*": ["../../packages/utils/src/*"],
+      "@trade-bot/redis": ["../../packages/redis/src/index.ts"],
+      "@trade-bot/redis/*": ["../../packages/redis/src/*"],
+      "@trade-bot/logger": ["../../packages/logger/src/index.ts"],
+      "@trade-bot/logger/*": ["../../packages/logger/src/*"],
+      "@trade-bot/types": ["../../packages/types/src/index.ts"],
+      "@trade-bot/types/*": ["../../packages/types/src/*"],
+      "@trade-bot/alpaca": ["../../packages/alpaca/src/index.ts"],
+      "@trade-bot/alpaca/*": ["../../packages/alpaca/src/*"],
+      "@trade-bot/hyperliquid": ["../../packages/hyperliquid/src/index.ts"],
+      "@trade-bot/hyperliquid/*": ["../../packages/hyperliquid/src/*"]
+    },
+
+    /* Miscellaneous */
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false,
+    "plugins": [{ "transform": "typescript-transform-paths" }],
+    "noUnusedLocals": true,
+    "composite": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "src/**/*.test.ts", "src/__tests__"]
+}

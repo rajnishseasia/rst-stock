@@ -1,0 +1,173 @@
+<SectionCard
+  id="glossary"
+  title="Glossary"
+  icon={BookOpen}
+  description="Plain-English definitions of the trading terms used throughout this app. New to trading? Start here."
+>
+  <p className="text-sm text-muted-foreground">
+    Tap a group to expand it. Every term is explained in plain language, with a quick example where it helps.
+  </p>
+
+  <CalloutBox type="tip">
+    <strong>The fastest path:</strong> a <strong>Bracket (OCO)</strong> order buys a stock and attaches a{" "}
+    <span className="text-green-500 font-medium">Take Profit</span> and a{" "}
+    <span className="text-red-500 font-medium">Stop Loss</span> for you. If you only learn a few terms, learn those three.
+  </CalloutBox>
+
+  {/* ── Order Types ── */}
+  <CollapsibleSection title="Order Types — how you buy and sell" defaultOpen>
+    <div className="grid gap-2 text-sm">
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Market order</strong> — Buys or sells right now at the best available price. Fast, but no price guarantee.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Limit order</strong> — Only fills at the price you set or better. Example: a buy limit at $225 won't fill until the stock reaches $225 or lower.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Stop Market</strong> — Becomes a market order once the price hits a trigger you choose. Often used to sell automatically if a stock falls to a set level.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Stop Limit</strong> — Like Stop Market, but turns into a limit order at the trigger. More price control, but it may not fill if price moves too fast.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Bracket order</strong> — A buy with a Take Profit and Stop Loss attached automatically. In this app it's the "Buy + Auto-Exits (OCO)" option.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>OCO (One-Cancels-Other)</strong> — Two linked exits where filling one cancels the other. This app builds one OCO bracket for each take-profit level you add.
+      </div>
+    </div>
+  </CollapsibleSection>
+
+  {/* ── Exits & Risk ── */}
+  <CollapsibleSection title="Exits & Risk — protecting and sizing a trade">
+    <div className="grid gap-2 text-sm">
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Stop Loss (SL)</strong> — An exit that sells if the price drops to a level you pick, so a losing trade can't keep getting worse.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Take Profit (TP)</strong> — An exit that sells when the price rises to a level you pick, locking in the gain. You can set several to sell in pieces.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Trailing stop</strong> — A stop that moves up as price rises but never back down. Example: a 2% trailing stop sells if price falls 2% from its high.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Entry price</strong> — The price you get into a trade at. This app uses it to calculate R-based take-profits. Click <span className="text-blue-500 font-medium">"Sync Mkt"</span> to fill it with the live price.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>R / R-multiple</strong> — R is your risk per share: the distance from entry to stop loss. +1R aims to make what you'd lose at the stop (1:1); +2R aims for double. Example: entry $230, stop $226 → 1R = $4, so +1R = $234.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Max Risk ($)</strong> — The most you're willing to lose if your stop is hit. The app suggests a quantity from it: roughly Max Risk ÷ the distance from price to your stop.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Quantity</strong> — How much you're trading: shares for stocks, contracts for options.
+      </div>
+    </div>
+  </CollapsibleSection>
+
+  {/* ── Direction ── */}
+  <CollapsibleSection title="Direction — which way you're betting">
+    <div className="grid gap-2 text-sm">
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Long</strong> — Betting the price goes <span className="text-green-500 font-medium">up</span>. You buy first and profit if it rises.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Short</strong> — Betting the price goes <span className="text-red-500 font-medium">down</span>. You sell borrowed shares first and profit if it falls, buying back lower to close.
+      </div>
+    </div>
+  </CollapsibleSection>
+
+  {/* ── Time in Force ── */}
+  <CollapsibleSection title="Time in Force — how long an order stays open">
+    <div className="grid gap-2 text-sm">
+      <div className="p-2 rounded bg-muted/50">
+        <strong>GTC (Good Till Cancelled)</strong> — Stays open across days until it fills or you cancel it. The default for stock orders here.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Day</strong> — Active only for today; cancelled at market close if unfilled. Options orders here always use Day.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>IOC (Immediate or Cancel)</strong> — Fill what's available instantly, cancel the rest. Partial fills allowed.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>FOK (Fill or Kill)</strong> — Fill the entire order at once or cancel it all. No partial fills.
+      </div>
+    </div>
+  </CollapsibleSection>
+
+  {/* ── Account ── */}
+  <CollapsibleSection title="Account — what the numbers mean">
+    <div className="grid gap-2 text-sm">
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Portfolio Value</strong> — The total value of your account: all positions plus your cash.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Buying Power</strong> — How much you can still spend on new positions right now. May exceed cash if your account has margin.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Cash</strong> — Uninvested money in your account, not tied up in any position.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Paper vs Live account</strong> — Paper trades with fake money to practice; Live trades with real money. The active one is labeled at the top of the trade form.
+      </div>
+    </div>
+  </CollapsibleSection>
+
+  {/* ── Options ── */}
+  <CollapsibleSection title="Options — for trading calls & puts">
+    <div className="grid gap-2 text-sm">
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Option</strong> — A contract giving you the right (not obligation) to buy or sell a stock at a set price before a set date. Cheaper than the stock, but can expire worthless.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Call</strong> — An option that profits when the stock goes <span className="text-green-500 font-medium">up</span>. The right to buy at the strike price.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Put</strong> — An option that profits when the stock goes <span className="text-red-500 font-medium">down</span>. The right to sell at the strike price.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Contract</strong> — One unit of an option, usually covering 100 shares — so cost and risk are multiplied by 100.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Strike (strike price)</strong> — The fixed price the option lets you buy (call) or sell (put) at. You pick it from a dropdown here.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Expiration</strong> — The date the option stops being valid. After it, the option is worth its in-the-money value or nothing.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Premium</strong> — The price you pay to buy an option (or collect to sell one). Shown here as Last and Bid/Ask.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>In / Out of the money</strong> — In the money: the option has exercise value now (call strike below price, or put strike above). Out of the money: it currently has none.
+      </div>
+    </div>
+  </CollapsibleSection>
+
+  {/* ── Market Basics ── */}
+  <CollapsibleSection title="Market Basics — prices & how trades happen">
+    <div className="grid gap-2 text-sm">
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Ticker / Symbol</strong> — The short code for a stock, like AAPL or TSLA. Type it in the Symbol field to load a chart and price.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Bid</strong> — The highest price a buyer will pay right now. Sell now and you generally get the bid.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Ask</strong> — The lowest price a seller will accept right now. Buy now and you generally pay the ask.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Spread</strong> — The gap between the bid and ask. A wide spread makes entering and exiting more expensive.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Fill</strong> — When your order actually executes. A full fill trades the whole order; a partial fill trades only some.
+      </div>
+      <div className="p-2 rounded bg-muted/50">
+        <strong>Slippage</strong> — The difference between the price you expected and the price you got. Common with market orders in fast or thin markets.
+      </div>
+    </div>
+  </CollapsibleSection>
+
+  <CalloutBox type="info">
+    Definitions here are general education, not financial advice. Practice on a <strong>Paper account</strong> before risking real money on a <strong>Live account</strong>.
+  </CalloutBox>
+</SectionCard>

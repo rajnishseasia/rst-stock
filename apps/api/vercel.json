@@ -1,0 +1,5 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "cd ../.. && bun install --frozen-lockfile",
+  "buildCommand": "cd ../.. && API_DEPLOY=true bun run build --filter=@trade-bot/api && cd apps/api && API_DEPLOY=true node postbuild.js"
+}

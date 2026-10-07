@@ -1,0 +1,82 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "DATABASE_URL",
+    "DATABASE_URL_POOLED",
+    "DATABASE_URL_DIRECT",
+    "DISCORD_CLIENT_ID",
+    "DISCORD_CLIENT_SECRET",
+    "JWT_SECRET",
+    "DISCORD_REDIRECT_URI",
+    "FRONTEND_URL",
+    "FRONTEND_URL_ALT",
+    "VERCEL",
+    "NODE_ENV",
+    "TEMP_ENV",
+    "LOG_PRETTY",
+    "LOG_LEVEL",
+    "DISABLE_CONSOLE_REDACTION",
+    "SENTRY_ENABLED",
+    "SENTRY_DSN",
+    "SENTRY_ENVIRONMENT",
+    "SENTRY_RELEASE",
+    "SENTRY_SAMPLE_RATE",
+    "SENTRY_TRACES_SAMPLE_RATE",
+    "SENTRY_PROFILES_SAMPLE_RATE",
+    "LOG_BRIDGE_URL",
+    "LOG_BRIDGE_TOKEN",
+    "LOG_BRIDGE_PORT",
+    "LOG_DOMEAPI_HTTP_TRACE",
+    "LOG_DOMEAPI_VERBOSE",
+    "REDIS_URL",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "TWITTER_CLIENT_ID",
+    "TWITTER_CLIENT_SECRET",
+    "BETTER_AUTH_URL",
+    "BETTER_AUTH_SECRET",
+    "TRADIER_ACCESS_TOKEN",
+    "TRADIER_BASE_URL",
+    "TRADESTATION_BASE_URL",
+    "ENCRYPTION_KEY",
+    "API_DEPLOY",
+    "WORKER_HTTP_URL",
+    "WORKER_HTTP_PORT",
+    "WORKER_API_SECRET",
+    "PNL_IMAGE_ASSETS_DIR"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", ".next/**", ".vercel/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:push": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:studio": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:migrate": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:generate": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

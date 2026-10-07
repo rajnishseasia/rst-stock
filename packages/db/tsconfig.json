@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    // Language and environment
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022"],
+    "moduleResolution": "bundler",
+
+    // Emit options
+    "noEmit": false,
+    "declaration": true,
+    "outDir": "dist",
+    "declarationMap": true,
+    "sourceMap": true,
+
+    // Type checking
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": false,
+
+    // Interop
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    /* Paths */
+    "baseUrl": "./",
+    "paths": {
+      "@trade-bot/utils": ["../utils/src/index.ts"],
+      "@trade-bot/utils/*": ["../utils/src/*"]
+    },
+
+    // Skip lib check for faster compilation
+    "skipLibCheck": true,
+    
+    // Output configuration
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "migrations"]
+}

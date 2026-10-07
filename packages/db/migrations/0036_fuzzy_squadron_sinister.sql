@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "twitter_name" text;

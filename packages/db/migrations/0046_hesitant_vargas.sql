@@ -1,0 +1,1 @@
+ALTER TABLE "copy_mirror_deliveries" ADD COLUMN "notification_read_at" timestamp with time zone;

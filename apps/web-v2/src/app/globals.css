@@ -1,0 +1,780 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/sora";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+@import "./theme.css";
+@import "./brand-tokens.css";
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply font-sans bg-background text-foreground antialiased;
+    /* Inter variable axis: 450 reads near-medium for dense data UI without
+       collapsing the gap to font-medium/font-semibold. */
+    font-weight: 450;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+  }
+  a,
+  [role="button"],
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  /* Compact chrome only. Data-dense regions should use .premium-pane. */
+  .glass {
+    background-color: var(--surface-command);
+    border-color: var(--glass-border);
+  }
+
+  /* --- Terminal surfaces ------------------------------------------------ */
+
+  .premium-canvas,
+  .terminal-canvas {
+    background-color: var(--surface-canvas);
+    color: var(--foreground);
+    transition:
+      background-color var(--duration-panel) var(--easing-panel),
+      color var(--duration-ui) var(--easing-ui);
+  }
+
+  /* Pane surfaces stay opaque so charts, tables, and prices remain crisp. */
+  .premium-pane,
+  .premium-panel {
+    border: 1px solid var(--surface-border);
+  }
+
+  .premium-pane,
+  .premium-panel,
+  .terminal-pane {
+    background-color: var(--surface-pane);
+    color: var(--card-foreground);
+    box-shadow: var(--surface-pane-shadow);
+    transition:
+      background-color var(--duration-panel) var(--easing-panel),
+      border-color var(--duration-ui) var(--easing-ui),
+      box-shadow var(--duration-ui) var(--easing-ui),
+      color var(--duration-ui) var(--easing-ui);
+  }
+
+  .premium-command,
+  .premium-floating {
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+  }
+
+  .premium-command,
+  .premium-floating,
+  .terminal-command-surface,
+  .terminal-floating-surface {
+    background-clip: padding-box;
+    color: var(--popover-foreground);
+    transition:
+      background-color var(--duration-panel) var(--easing-panel),
+      border-color var(--duration-ui) var(--easing-ui),
+      box-shadow var(--duration-ui) var(--easing-ui),
+      color var(--duration-ui) var(--easing-ui);
+  }
+
+  .premium-command,
+  .terminal-command-surface {
+    background-color: var(--surface-command);
+    box-shadow: var(--surface-command-shadow);
+  }
+
+  .premium-floating,
+  .terminal-floating-surface {
+    background-color: var(--surface-floating);
+    box-shadow: var(--surface-floating-shadow);
+  }
+
+  .terminal-command-bar {
+    border-color: var(--surface-border);
+    background-color: var(--surface-command);
+    box-shadow: inset 0 -1px 0 var(--surface-border);
+    transition:
+      background-color var(--duration-panel) var(--easing-panel),
+      border-color var(--duration-ui) var(--easing-ui);
+  }
+
+  .terminal-pane-header {
+    border-color: var(--surface-border);
+    background-color: color-mix(in oklab, var(--surface-pane) 88%, var(--surface-command));
+  }
+
+  .terminal-resize-handle {
+    border-color: var(--surface-border);
+    background-color: color-mix(in oklab, var(--surface-pane) 88%, var(--surface-canvas));
+    transition:
+      background-color var(--duration-ui) var(--easing-ui),
+      border-color var(--duration-ui) var(--easing-ui);
+  }
+
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass {
+      background-color: var(--glass-command-background);
+      backdrop-filter: blur(var(--glass-command-blur));
+      -webkit-backdrop-filter: blur(var(--glass-command-blur));
+    }
+
+    .premium-floating,
+    .terminal-floating-surface {
+      background-color: var(--glass-floating-background);
+      backdrop-filter: blur(var(--glass-floating-blur));
+      -webkit-backdrop-filter: blur(var(--glass-floating-blur));
+    }
+  }
+
+  .premium-focus,
+  .premium-focus-within,
+  .terminal-icon-action,
+  .terminal-list-row {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: outline-color var(--duration-fast) var(--easing-ui);
+  }
+
+  .terminal-icon-action,
+  .terminal-list-row {
+    outline-offset: -2px;
+  }
+
+  .premium-focus:focus-visible,
+  .premium-focus-within:focus-within,
+  .terminal-icon-action:focus-visible,
+  .terminal-list-row:focus-visible {
+    outline-color: var(--focus-ring-color);
+  }
+
+  .premium-hover,
+  .terminal-icon-action,
+  .terminal-list-row {
+    transition:
+      background-color var(--duration-ui) var(--easing-ui),
+      border-color var(--duration-ui) var(--easing-ui),
+      box-shadow var(--duration-ui) var(--easing-ui);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .premium-hover:hover,
+    .terminal-icon-action:hover,
+    .terminal-list-row:hover,
+    .terminal-resize-handle:hover {
+      border-color: var(--surface-border-strong);
+      background-color: var(--surface-hover);
+    }
+  }
+
+  .premium-hover:active,
+  .terminal-icon-action:active,
+  .terminal-list-row:active {
+    background-color: var(--surface-active);
+    transition-duration: var(--duration-fast);
+  }
+
+  .premium-panel-enter,
+  .terminal-pane-enter {
+    animation: premium-pane-enter var(--duration-panel) var(--easing-panel) both;
+  }
+
+  @keyframes premium-pane-enter {
+    from {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .live-data-value {
+    display: inline-block;
+    border-radius: 2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .price-flash-up,
+  .live-data-value[data-direction="up"] {
+    animation: price-up-flash calc(var(--duration-panel) * 2) var(--easing-ui) both;
+  }
+
+  .price-flash-down,
+  .live-data-value[data-direction="down"] {
+    animation: price-down-flash calc(var(--duration-panel) * 2) var(--easing-ui) both;
+  }
+
+  @keyframes price-up-flash {
+    0%,
+    28% {
+      background-color: var(--price-up-flash);
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+
+  @keyframes price-down-flash {
+    0%,
+    28% {
+      background-color: var(--price-down-flash);
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+
+  /* Halo behind the live connection dot: the ring expands and fades so "Live"
+     reads as an ongoing state, not a static badge. The prefers-reduced-motion
+     block below already clamps infinite animations to one iteration, so no
+     extra guard is needed here. */
+  .pulse-ring {
+    animation: pulse-ring 2s linear infinite;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2.5);
+    }
+  }
+
+  /* --- Landing FX ------------------------------------------------------- */
+
+  /* Hardware-accelerated spring easing (CSS linear() curve), for hover
+     lifts that bounce without JS. Baseline-safe since 2024. */
+  .ease-spring {
+    transition-timing-function: linear(
+      0, 0.009, 0.035 2.1%, 0.141 4.4%, 0.723 12.9%, 0.938 16.7%,
+      1.017, 1.077 20.4%, 1.121, 1.149 24.3%, 1.159, 1.163 27%,
+      1.154, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%, 0.991,
+      0.977 51%, 0.974 53.8%, 0.975 57.1%, 0.997 69.8%, 1.003 76.9%, 1
+    );
+  }
+
+  /* Variable-font weight swell on hover (Sora Variable wght axis).
+     Applied to card titles via .group hover so the whole card triggers it. */
+  .wght-title {
+    font-variation-settings: "wght" 600;
+    transition: font-variation-settings 0.35s ease;
+  }
+  .group:hover .wght-title {
+    font-variation-settings: "wght" 800;
+  }
+
+  /* Premium glass edge: inset top highlight + inner hairline ring. The
+     top highlight is what reads "expensive" on dark cards. */
+  .glass-edge {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+      0 30px 80px -30px rgba(0, 0, 0, 0.9);
+  }
+  .glass-edge-soft {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  }
+
+  /* Animated gold star/dust particle. One looping keyframe does both the
+     twinkle and a slow upward drift; opacity hits 0 at both loop ends so
+     the position snap on restart is invisible. Compositor-only properties.
+     Per-star variance comes from CSS vars set inline (--dur, --delay,
+     --tw, --drift). */
+  .rst-star {
+    opacity: 0;
+    animation: rst-star var(--dur, 10s) linear infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  @keyframes rst-star {
+    0% {
+      opacity: 0;
+      transform: translate(0, 0) scale(0.7);
+    }
+    20% {
+      opacity: var(--tw, 0.9);
+    }
+    45% {
+      opacity: calc(var(--tw, 0.9) * 0.25);
+    }
+    55% {
+      transform: translate(var(--sway, 8px), calc(var(--drift, -40px) * 0.55))
+        scale(1.05);
+    }
+    75% {
+      opacity: var(--tw, 0.9);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(0, var(--drift, -40px)) scale(1.15);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rst-star {
+      animation: none;
+      opacity: 0.3;
+    }
+  }
+}
+
+/* Desktop terminal art direction: Bullpen-inspired matte planes, precise
+   compartment lines, bright market typography, and floating glass only where
+   content genuinely overlays the workspace. Mobile remains intentionally
+   outside this visual pass. */
+@media (min-width: 1280px) {
+  .rst-terminal {
+    background: var(--surface-canvas);
+    color: var(--foreground);
+    font-size: 13px;
+  }
+
+  .rst-terminal .terminal-global-header {
+    border-color: var(--surface-border);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Header sits on the canvas itself; separation comes from the bottom
+     hairline only, never from elevation. */
+  .dark .rst-terminal .terminal-global-header {
+    background: var(--surface-canvas);
+  }
+
+  .rst-terminal .terminal-global-header-inner {
+    max-width: none;
+    padding-inline: 14px;
+  }
+
+  .rst-terminal .terminal-global-header .font-wordmark {
+    font-family: "Sora Variable", "Inter Variable", sans-serif;
+    font-size: 15px;
+    font-weight: 620;
+    letter-spacing: 0.16em;
+  }
+
+  .dark .rst-terminal .terminal-global-header .font-wordmark {
+    color: var(--foreground);
+  }
+
+  .rst-terminal .terminal-account-metric {
+    min-width: 104px;
+    border-left: 1px solid var(--surface-border);
+    padding-left: 12px;
+  }
+
+  .rst-terminal .terminal-account-metric > :first-child {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .dark .rst-terminal .terminal-account-metric > :first-child {
+    color: var(--muted-foreground-2);
+  }
+
+  .rst-terminal .terminal-account-metric > :last-child {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .dark .rst-terminal .terminal-account-metric > :last-child {
+    color: var(--foreground);
+  }
+
+  .rst-terminal .terminal-workspace {
+    background: var(--surface-canvas);
+  }
+
+  .rst-terminal .terminal-drawer-shell-left {
+    border-right: 1px solid var(--surface-border);
+  }
+
+  .rst-terminal .terminal-drawer-shell-right {
+    border-left: 1px solid var(--surface-border);
+  }
+
+  .rst-terminal .terminal-drawer {
+    border: 0;
+    border-radius: 0;
+    background: var(--surface-pane);
+    box-shadow: none;
+  }
+
+  .rst-terminal .terminal-drawer-header {
+    height: 36px;
+    border-color: var(--surface-border);
+    background: var(--surface-command);
+    box-shadow: inset 0 1px 0 var(--terminal-edge-highlight);
+  }
+
+  .rst-terminal .terminal-drawer-header h2 {
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+  }
+
+  .dark .rst-terminal .terminal-drawer-header h2 {
+    color: var(--muted-foreground);
+  }
+
+  .rst-terminal .terminal-drawer-header [data-terminal-title-accent] {
+    height: 12px;
+    background: var(--primary);
+    opacity: 0.72;
+  }
+
+  .rst-terminal .terminal-drawer-header [data-terminal-header-controls] {
+    background: transparent;
+  }
+
+  .rst-terminal .terminal-drawer-tabs {
+    height: 35px;
+    border-color: var(--surface-border);
+  }
+
+  .dark .rst-terminal .terminal-drawer-tabs {
+    background: #07141d;
+  }
+
+  .rst-terminal .terminal-drawer-tabs [data-terminal-tab] {
+    font-size: 10px;
+  }
+
+  .dark .rst-terminal .terminal-drawer-tabs [data-terminal-tab] {
+    color: var(--muted-foreground);
+  }
+
+  .dark .rst-terminal .terminal-drawer-tabs [data-terminal-tab-state="active"] {
+    color: var(--foreground);
+  }
+
+  .rst-terminal .terminal-drawer-tabs [data-terminal-tab-indicator] {
+    bottom: -1px;
+    height: 1px;
+    background: var(--primary);
+  }
+
+  .rst-terminal .terminal-drawer-pane,
+  .rst-terminal [data-terminal-pane-content] {
+    background: var(--surface-pane);
+  }
+
+  .rst-terminal [data-terminal-pane-subheader] {
+    border-color: var(--surface-border);
+  }
+
+  .dark .rst-terminal [data-terminal-pane-subheader] {
+    background: #07151e;
+  }
+
+  .rst-terminal .terminal-chart-column {
+    background: var(--surface-canvas);
+  }
+
+  .rst-terminal .terminal-chart-shell {
+    border: 0;
+    border-radius: 0;
+    background: var(--surface-canvas);
+    box-shadow: none;
+  }
+
+  .rst-terminal .terminal-instrument-strip {
+    min-height: 54px;
+    gap: 8px;
+    border-color: var(--surface-border);
+    background: var(--surface-pane);
+    padding: 7px 8px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .dark .rst-terminal .terminal-instrument-strip {
+    box-shadow:
+      inset 0 1px 0 var(--terminal-edge-highlight),
+      inset 0 -1px 0 rgb(0 0 0 / 0.35);
+  }
+
+  .rst-terminal .terminal-instrument-strip .terminal-command-surface {
+    border-color: var(--surface-border-strong);
+    border-radius: 4px;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .dark .rst-terminal .terminal-instrument-strip .terminal-command-surface {
+    background: #050f16;
+  }
+
+  .rst-terminal .terminal-instrument-strip .terminal-command-surface:focus-within {
+    border-color: color-mix(in srgb, var(--primary) 62%, var(--surface-border));
+    box-shadow: inset 0 -1px 0 var(--primary);
+    outline: none;
+  }
+
+  .rst-terminal .terminal-stat {
+    min-width: 108px;
+    border-color: var(--surface-border);
+    padding-inline: 12px;
+  }
+
+  .rst-terminal .terminal-stat > :first-child {
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: 0.07em;
+  }
+
+  .dark .rst-terminal .terminal-stat > :first-child {
+    color: var(--muted-foreground-2);
+  }
+
+  .rst-terminal .terminal-stat > :last-child {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .dark .rst-terminal .terminal-stat > :last-child {
+    color: var(--foreground);
+  }
+
+  .rst-terminal .terminal-stat[data-terminal-stat-priority="primary"] > :last-child {
+    font-size: 15px;
+    font-weight: 650;
+  }
+
+  .rst-terminal .terminal-stat[data-terminal-stat-tone="positive"] > :last-child {
+    color: var(--color-green-400);
+  }
+
+  .rst-terminal .terminal-stat[data-terminal-stat-tone="negative"] > :last-child {
+    color: var(--color-red-400);
+  }
+
+  .rst-terminal .terminal-chart-canvas,
+  .rst-terminal .terminal-chart-canvas iframe {
+    display: block;
+    background: var(--surface-canvas);
+  }
+
+  .rst-terminal .terminal-bottom-drawer {
+    border-radius: 0;
+    background: var(--surface-pane);
+    box-shadow: none;
+  }
+
+  .rst-terminal .terminal-pane-header {
+    border-color: var(--surface-border);
+    background: var(--surface-command);
+  }
+
+  .rst-terminal .terminal-resize-handle {
+    height: 16px;
+    border-color: var(--surface-border);
+  }
+
+  .dark .rst-terminal .terminal-resize-handle {
+    background: #06131b;
+  }
+
+  .rst-terminal .terminal-resize-handle > span {
+    height: 1px;
+    width: 54px;
+    border-radius: 0;
+  }
+
+  .dark .rst-terminal .terminal-resize-handle > span {
+    background: #2a4654;
+  }
+
+  .rst-terminal .terminal-resize-handle:hover > span,
+  .rst-terminal .terminal-resize-handle:focus-visible > span,
+  .rst-terminal .terminal-resize-handle-active > span {
+    background: var(--primary);
+  }
+
+  .rst-terminal .terminal-drawer-grip {
+    width: 1px;
+    border-radius: 0;
+    opacity: 0.55;
+  }
+
+  .dark .rst-terminal .terminal-drawer-grip {
+    background: #294553;
+  }
+
+  .rst-terminal .terminal-signal-feed,
+  .rst-terminal .terminal-ai-panel {
+    border: 0;
+    border-radius: 0;
+    background: var(--surface-pane);
+    box-shadow: none;
+    --tw-ring-shadow: 0 0 #0000;
+  }
+
+  .rst-terminal .terminal-signal-row {
+    border-color: var(--surface-border);
+    background: transparent;
+  }
+
+  .rst-terminal .terminal-signal-row:hover {
+    background: var(--surface-hover);
+  }
+
+  .rst-terminal .terminal-ai-header {
+    border-color: var(--surface-border);
+    background: var(--surface-command);
+  }
+
+  .rst-terminal .terminal-ai-composer {
+    border-color: var(--surface-border);
+    background: var(--surface-command);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .rst-terminal .terminal-trade-ticket,
+  .rst-terminal .terminal-perp-ticket {
+    background: var(--surface-pane);
+  }
+
+  .rst-terminal .terminal-trade-ticket section {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    border-color: var(--surface-border);
+    background: transparent;
+  }
+
+  .rst-terminal .terminal-trade-ticket .premium-panel {
+    border-radius: 3px;
+    border-color: var(--surface-border);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .rst-terminal .terminal-trade-footer {
+    border-color: var(--surface-border);
+    background: var(--surface-command);
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .rst-terminal .terminal-binary-toggle {
+    border-color: var(--surface-border-strong);
+    border-radius: 4px;
+  }
+
+  .dark .rst-terminal .terminal-binary-toggle {
+    background: #06121a;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.02);
+  }
+
+  .rst-terminal .terminal-binary-toggle > button {
+    border-radius: 3px;
+    box-shadow: none;
+  }
+
+  .rst-terminal .terminal-trade-submit {
+    border-radius: 4px;
+    box-shadow: none;
+    transition:
+      filter var(--duration-ui) var(--easing-ui),
+      transform var(--duration-fast) var(--easing-ui);
+  }
+
+  .rst-terminal .terminal-trade-submit:hover {
+    filter: brightness(1.05);
+  }
+
+  .rst-terminal .terminal-trade-submit:active,
+  .rst-terminal .terminal-icon-action:active {
+    transform: translateY(1px);
+  }
+
+  .rst-terminal .terminal-floating-surface {
+    border-color: var(--glass-border);
+    box-shadow: var(--surface-floating-shadow);
+  }
+
+  /* Fix 1: Prevent the TradingView iframe from intercepting pointer events
+     when the command bar has keyboard focus or a Radix dropdown is open
+     within it. Dropdowns render into a Portal above the chart canvas but
+     mouse events aimed at the dropdown items pass through the iframe first
+     unless we suppress pointer activity on the canvas layer.
+     :has() is broadly supported (Safari 15.4+, Chrome 105+, Firefox 121+). */
+  .terminal-chart-shell:has(.terminal-command-bar:focus-within) .terminal-chart-canvas,
+  .terminal-chart-shell:has(.terminal-command-bar [data-state="open"]) .terminal-chart-canvas {
+    pointer-events: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .premium-focus:focus-visible,
+  .premium-focus-within:focus-within,
+  .terminal-icon-action:focus-visible,
+  .terminal-list-row:focus-visible {
+    outline-color: Highlight;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-delay: 0ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

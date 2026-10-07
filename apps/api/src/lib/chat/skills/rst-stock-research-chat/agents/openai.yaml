@@ -1,0 +1,4 @@
+interface:
+  display_name: "RST Stock Research Chat"
+  short_description: "Cited stock chat guardrails"
+  default_prompt: "Use this server-owned skill to answer stock research questions with read-only portfolio context and cited SEC/news sources."

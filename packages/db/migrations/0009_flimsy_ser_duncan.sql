@@ -1,0 +1,1 @@
+ALTER TABLE "orders" ADD COLUMN "copy_source_label" text;

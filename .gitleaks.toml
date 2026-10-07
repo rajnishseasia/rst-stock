@@ -1,0 +1,29 @@
+title = "Ready Set Trade current-tree secret scan"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Ignore generated dependencies, build output, and vendored chart assets."
+paths = [
+  '''(^|/)(node_modules|\.next|dist|coverage|\.turbo)(/|$)''',
+  '''^apps/web-v2/(public/charting_library|src/vendor)/''',
+]
+
+[[rules]]
+id = "discord-client-id"
+
+  [[rules.allowlists]]
+  description = "Discord channel identifiers are public routing metadata, not credentials."
+  paths = ['''(^|/)apps/worker/src/services/discord-poller\.ts$''']
+
+[[rules]]
+id = "generic-api-key"
+
+  [[rules.allowlists]]
+  description = "Test fixtures using the canonical, publicly documented Anvil/Hardhat dev key (account #1). It is printed in every Hardhat tutorial and is never a real secret; the tests need a syntactically valid 32-byte hex key."
+  paths = [
+    '''(^|/)apps/web-v2/src/lib/perps-private-key\.test\.ts$''',
+    '''(^|/)packages/hyperliquid/src/client\.test\.ts$''',
+  ]
+  regexes = ['''59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d''']

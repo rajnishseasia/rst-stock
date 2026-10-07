@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    /* Base Options: */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ES2024",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    /* If transpiling with TypeScript: */
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "sourceMap": true,
+
+    /* Paths */
+    "baseUrl": "./",
+    "paths": {
+      "@trade-bot/logger": ["../logger/src/index.ts"],
+      "@trade-bot/logger/*": ["../logger/src/*"],
+      "@trade-bot/utils": ["../utils/src/index.ts"],
+      "@trade-bot/utils/*": ["../utils/src/*"]
+    },
+
+    /* Miscellaneous */
+    "noEmit": false,
+    "emitDeclarationOnly": false,
+    "declaration": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

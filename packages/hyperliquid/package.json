@@ -1,0 +1,30 @@
+{
+  "name": "@trade-bot/hyperliquid",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc -p tsconfig.json",
+    "check-types": "bun run typecheck",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@nktkas/hyperliquid": "^0.33.1",
+    "@privy-io/node": "^0.24.0",
+    "@trade-bot/utils": "workspace:*",
+    "viem": "^2.54.6",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.7.3"
+  }
+}

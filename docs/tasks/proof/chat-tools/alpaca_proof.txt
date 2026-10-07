@@ -1,0 +1,68 @@
+════════════════════════════════════════════════════════════════════════════════
+  ALPACA AI TOOLS — END-TO-END SMOKE TEST  ✅
+════════════════════════════════════════════════════════════════════════════════
+
+User:         napindc@vt.edu (real prod Supabase user)
+LLM:          DeepSeek V4 Pro (key encrypted in user_llm_api_credentials)
+Broker:       Alpaca LIVE (credential in user_api_credentials)
+Prompt:       "What's in my Alpaca account right now?
+               Use the alpaca_get_account tool and the alpaca_list_positions tool."
+
+──────────────────────  meta frame (registered tools)  ─────────────────────────
+{
+  "provider": "DeepSeek V4 Pro",
+  "model": "deepseek-v4-pro",
+  "conversationId": "a78e2520-4dcf-452b-925d-3cc9e50f45dd",
+  "tools": [
+    "alpaca_get_account",
+    "alpaca_list_positions",
+    "alpaca_list_orders",
+    "alpaca_get_bars",
+    "alpaca_get_quote",
+    "alpaca_get_watchlist"
+  ]
+}
+
+──────────────────────  tool call 1: alpaca_get_account  ───────────────────────
+→ args: {}
+← ok=true   display: "Account: $5037.14 value · $18673.28 buying power"
+
+──────────────────────  tool call 2: alpaca_list_positions  ────────────────────
+→ args: {}
+← ok=true   display: "4 positions · $1179.19 total"
+
+──────────────────────  done — model's final reply  ───────────────────────────
+
+## Account Overview
+| Metric              | Value      |
+|---------------------|------------|
+| Status              | ACTIVE     |
+| Portfolio Value     | $5,037.14  |
+| Cash                | $3,857.95  |
+| Buying Power        | $18,673.28 |
+| Trading Blocked     | No         |
+| Pattern Day Trader  | No         |
+
+## Positions (4 open)
+| Ticker | Qty | Avg Entry | Current  | Market Value | Unrealized P/L | %       |
+|--------|-----|-----------|----------|--------------|----------------|---------|
+| AMD    |  1  | $492.75   | $537.37  | $537.37      | +$44.62        | +9.06%  |
+| HOOD   |  1  | $ 86.58   | $108.15  | $108.15      | +$21.57        | +24.91% |
+| GME    |  1  | $ 22.11   | $ 21.52  | $ 21.52      |  -$0.59        |  -2.68% |
+| LIN    |  1  | $520.56   | $512.15  | $512.15      |  -$8.41        |  -1.62% |
+
+Total positions value: $1,179.19
+
+Quick takeaways:
+  - HOOD is your star performer, up nearly 25% — strong momentum there.
+  - AMD is also doing well at +9%.
+  - LIN and GME are slightly in the red, both down less than 2%.
+  - You also have an open limit sell on LIN at $552.73 (from earlier context),
+    about 7.9% above the current price — sitting and waiting.
+  - Your $18.6K buying power gives you plenty of dry powder.
+
+════════════════════════════════════════════════════════════════════════════════
+  RESULT: LLM picked the right tools from the registry, both tools executed
+  against the real Alpaca LIVE account, and DeepSeek synthesized the numbers
+  into a useful response.
+════════════════════════════════════════════════════════════════════════════════

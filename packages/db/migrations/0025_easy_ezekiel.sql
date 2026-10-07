@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS "orders_hl_perp_active_idx" ON "orders" USING btree (("venue_network" is null),"created_at" DESC NULLS LAST) WHERE "orders"."venue" = 'hyperliquid' and "orders"."asset_type" = 'PERP' and "orders"."status" in ('PENDING', 'SUBMITTED', 'PARTIAL');

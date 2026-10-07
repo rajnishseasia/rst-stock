@@ -1,0 +1,1 @@
+ALTER TYPE "public"."order_type" ADD VALUE 'OCO';

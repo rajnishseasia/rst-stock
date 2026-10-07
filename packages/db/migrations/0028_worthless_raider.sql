@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS "orders_hl_legacy_pnl_idx" ON "orders" USING btree ("id") WHERE "orders"."venue" = 'hyperliquid' and "orders"."funding_paid" is not null and "orders"."realized_pnl" is distinct from "orders"."funding_paid";

@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+.next/
+.turbo/
+out/
+apps/api/index.js
+
+# Environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Playwright MCP session artifacts (snapshots, console logs)
+.playwright-mcp/
+npm-debug.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Drizzle
+drizzle/
+
+# PM2
+.pm2/
+
+# Docker
+docker-compose.override.yml
+
+# Claude Code session uploads (screenshots, etc.)
+.claude-uploads/
+
+# Local screenshot scratchpad (kept out of the repo; commit specific
+# captures to docs/screenshots/ when they belong with a PR).
+.screenshots/
+.claude/worktrees/
+.vercel
+.env*

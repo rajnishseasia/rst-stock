@@ -1,0 +1,45 @@
+{
+  "_comment": "Followers of external Discord signal channels. Following is PER CHANNEL: every caller you follow needs an entry under 'channels', keyed by Discord channel ID, and an unlisted channel is never traded. riskPerTradeUsd = max $ to lose if the stop loss hits. leverage = HL margin leverage. marginMode = 'cross' or 'isolated'. Set enabled=false on a channel to pause all of that caller's entries, or on one follower to pause just that person. Exits still route to every follower listed on the channel, since a reduce-only order can only close exposure that entries already opened.",
+  "minConfidence": "medium",
+  "_rateLimitComment": "openRateLimits cap how many positions automation may OPEN, per sliding window, per (channel, follower). Exits are NEVER rate limited. maxOpens=0 pauses a channel's entries without disabling anyone. Channels that omit openRateLimits use defaultOpenRateLimits.",
+  "defaultOpenRateLimits": [
+    { "windowSeconds": 600, "maxOpens": 1 },
+    { "windowSeconds": 86400, "maxOpens": 5 }
+  ],
+  "channels": {
+    "1101943270076059819": {
+      "label": "neil",
+      "enabled": true,
+      "openRateLimits": [
+        { "windowSeconds": 600, "maxOpens": 1 },
+        { "windowSeconds": 86400, "maxOpens": 5 }
+      ],
+      "followers": [
+        {
+          "email": "napindc@vt.edu",
+          "riskPerTradeUsd": 150,
+          "leverage": 3,
+          "marginMode": "cross",
+          "enabled": true
+        }
+      ]
+    },
+    "1541001317902983198": {
+      "label": "testing",
+      "enabled": true,
+      "openRateLimits": [
+        { "windowSeconds": 600, "maxOpens": 1 },
+        { "windowSeconds": 86400, "maxOpens": 5 }
+      ],
+      "followers": [
+        {
+          "email": "napindc@vt.edu",
+          "riskPerTradeUsd": 10,
+          "leverage": 3,
+          "marginMode": "cross",
+          "enabled": true
+        }
+      ]
+    }
+  }
+}

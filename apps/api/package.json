@@ -1,0 +1,51 @@
+{
+  "name": "@trade-bot/api",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./src/routers/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/routers/index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "bunx tsdown && node postbuild.js",
+    "typecheck": "tsc -p tsconfig.json",
+    "check-types": "bun run typecheck",
+    "dev": "bun run --hot src/index.ts",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@alpacahq/alpaca-trade-api": "^3.0.1",
+    "@hono/trpc-server": "^0.4.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@nktkas/hyperliquid": "^0.33.1",
+    "@privy-io/node": "^0.24.0",
+    "@sentry/node": "^10.71.0",
+    "@trade-bot/alpaca": "workspace:*",
+    "@trade-bot/db": "workspace:*",
+    "@trade-bot/hyperliquid": "workspace:*",
+    "@trade-bot/logger": "workspace:*",
+    "@trade-bot/redis": "workspace:*",
+    "@trade-bot/types": "workspace:*",
+    "@trade-bot/utils": "workspace:*",
+    "@trpc/server": "^11.5.1",
+    "@vercel/functions": "^3.1.4",
+    "better-auth": "^1.4.17",
+    "drizzle-orm": "^0.31.2",
+    "hono": "^4.9.6",
+    "ioredis": "^5.8.2",
+    "pg": "^8.16.3",
+    "superjson": "^2.2.5",
+    "tsdown": "^0.15.0",
+    "viem": "^2.54.6",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.21",
+    "@types/pg": "^8.15.5",
+    "typescript": "^5.9.2"
+  }
+}

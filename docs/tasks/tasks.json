@@ -1,0 +1,721 @@
+{
+  "meta": {
+    "source_doc_id": "1rzwy36CG4aCpkWw_Ly0MUUKtO1MAbe0YGRwzdprM7U0",
+    "source_doc_title": "RST tasks",
+    "note": "Canonical task source of truth. Google Doc is a mirror sink. doc_row 1-26 are table rows; doc_row null = freeform notes below the table. status: todo|in_progress|implemented|audit_pass|audit_fail|verified|done|blocked. Each task is committed only after my audit + Codex review + proof + user confirmation.",
+    "status_legend": "done = shipped+verified; blocked = needs user input or non-code"
+  },
+  "tasks": [
+    {
+      "id": "T01",
+      "doc_row": 1,
+      "doc_task_text": "I put a stop loss and bought something but not see the stoploss set",
+      "title": "See & edit the stop-loss on a position",
+      "category": "positions",
+      "priority": "P1",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G1",
+      "files": [
+        "apps/web-v2/src/components/trade/positions-panel.tsx",
+        "apps/api/src/routers/positions.ts"
+      ],
+      "acceptance_criteria": [
+        "Each position shows its current stop-loss order (price + qty)",
+        "User can edit the stop price/qty via the modify-order endpoint",
+        "UI reflects the change after save"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "T02",
+      "doc_row": 2,
+      "doc_task_text": "When you click close.. You need a Modal pop up to choose how much you want to close",
+      "title": "Close-position modal (qty + limit/market)",
+      "category": "positions",
+      "priority": "P1",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G1",
+      "files": [
+        "apps/web-v2/src/components/trade/positions-panel.tsx",
+        "apps/api/src/routers/positions.ts"
+      ],
+      "acceptance_criteria": [
+        "Close button opens a modal",
+        "Choose qty (<= position qty) and order type Limit/Market (+limit price)",
+        "Submits the partial/full close; uses catchError"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "T03",
+      "doc_row": 3,
+      "doc_task_text": "Don't show your username on the top right but show your cash balance and positions balance",
+      "title": "Header shows cash + positions balance (not username)",
+      "category": "header",
+      "priority": "P1",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G3",
+      "files": [
+        "apps/web-v2/src/app/page.tsx",
+        "apps/web-v2/src/components/auth/user-menu.tsx"
+      ],
+      "acceptance_criteria": [
+        "Top-right no longer shows the username text",
+        "Shows cash balance + positions (portfolio) value from accountQuery"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "T04",
+      "doc_row": 4,
+      "doc_task_text": "Need to see closed positions",
+      "title": "Closed positions view",
+      "category": "positions",
+      "priority": "P1",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G1",
+      "files": [
+        "apps/web-v2/src/components/trade/positions-panel.tsx",
+        "apps/api/src/routers/positions.ts"
+      ],
+      "acceptance_criteria": [
+        "A closed-positions list (filled/closed) is viewable",
+        "Data sourced via positions.ts (not by editing orders.ts, owned by G5)"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "Data-source TBD: Alpaca closed orders vs local orders table."
+    },
+    {
+      "id": "T05",
+      "doc_row": 5,
+      "doc_task_text": "Need a favicon",
+      "title": "Favicon",
+      "category": "ui-global",
+      "priority": "P1",
+      "classification": "DONE",
+      "status": "done",
+      "owner_group": null,
+      "files": [
+        "apps/web-v2/src/app/icon.png",
+        "apps/web-v2/src/app/favicon.ico"
+      ],
+      "acceptance_criteria": [
+        "Bull favicon + app icons served"
+      ],
+      "verify": [],
+      "notes": "Favicon uses the Ready Set Trade bull image (done this session). User: confirmed done with bull image."
+    },
+    {
+      "id": "T06",
+      "doc_row": 6,
+      "doc_task_text": "Connecting paper trading account for testing",
+      "title": "Connect paper account",
+      "category": "trading",
+      "priority": "P1",
+      "classification": "DONE",
+      "status": "done",
+      "owner_group": null,
+      "files": [],
+      "acceptance_criteria": [
+        "Paper account connects + trades"
+      ],
+      "verify": [],
+      "notes": "Working (billi)."
+    },
+    {
+      "id": "T07",
+      "doc_row": 7,
+      "doc_task_text": "Why do i need railway if the sidebar is working ... timestamps are wrong",
+      "title": "Fix wrong relative timestamps in feed",
+      "category": "feed",
+      "priority": "P1",
+      "classification": "CODEABLE-NOW",
+      "status": "todo",
+      "owner_group": "G4",
+      "files": [
+        "apps/web-v2/src/components/feed/signal-feed.tsx",
+        "apps/api/src/routers/signals.ts"
+      ],
+      "acceptance_criteria": [
+        "Relative times accurate (correct UTC handling)",
+        "\"1 min ago\" matches true age"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "SKIPPED per user (root cause unconfirmed; server still falls back to now; no local signals to verify). Revisit with real signal data."
+    },
+    {
+      "id": "T08",
+      "doc_row": 8,
+      "doc_task_text": "BUG I tried to edit an order and it said Failed to modify order: Request failed with status code 422",
+      "title": "Friendly error on order-modify 422",
+      "category": "errors",
+      "priority": "P1",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G5",
+      "files": [
+        "apps/api/src/routers/orders.ts",
+        "apps/web-v2/src/components/trade/open-orders-panel.tsx"
+      ],
+      "acceptance_criteria": [
+        "modify 422 mapped to a typed friendly message",
+        "uses catchError (RULES.md)",
+        "UI shows the friendly message"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "User: TEST EVERYTHING."
+    },
+    {
+      "id": "T09",
+      "doc_row": 9,
+      "doc_task_text": "BAD UI/UX Does not make sense that the default options is from 1.5 years ago ... type the Strike",
+      "title": "Options date/strike polish",
+      "category": "trading",
+      "priority": "P2",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G2",
+      "files": [
+        "apps/web-v2/src/components/trade/trade-form.tsx"
+      ],
+      "acceptance_criteria": [
+        "No stale default date",
+        "Strike chosen from a dropdown (not typed)"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "Mostly done this session via expiration/strike dropdowns; verify + polish."
+    },
+    {
+      "id": "T10",
+      "doc_row": 10,
+      "doc_task_text": "If i start typing something in symbols, then click on manage exits then come back, the symbol ... shouldnt dissapear",
+      "title": "Preserve trade form state across tab switch",
+      "category": "trading",
+      "priority": "P2",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G2",
+      "files": [
+        "apps/web-v2/src/components/trade/trade-form.tsx",
+        "apps/web-v2/src/components/trade/trade-tab-context.tsx",
+        "apps/web-v2/src/app/page.tsx"
+      ],
+      "acceptance_criteria": [
+        "Switching tabs and back preserves symbol + all entered fields"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "Introduce shared trade-tab-context.tsx (G2) so page.tsx doesn't also mutate state."
+    },
+    {
+      "id": "T11",
+      "doc_row": 11,
+      "doc_task_text": "BAD UI/UX The price / % gain to the right of symbol should be in green if its in profit, or red if in loss for the day",
+      "title": "Day change colored green/red",
+      "category": "positions",
+      "priority": "P0",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G1",
+      "files": [
+        "apps/web-v2/src/components/trade/positions-panel.tsx",
+        "apps/web-v2/src/components/trade/trade-form.tsx"
+      ],
+      "acceptance_criteria": [
+        "Day change % is green when >=0, red when <0"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "Quick-win (Wave 1). Reuse existing green/red logic. [committed 01f9ec1; doc: DONE by mining helium]"
+    },
+    {
+      "id": "T12",
+      "doc_row": 12,
+      "doc_task_text": "BAD UI/UX If i have asset type = stocks, doesnt make sense for direction = long (calls)",
+      "title": "Stock direction shouldn't say Long (Calls)",
+      "category": "trading",
+      "priority": "P2",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G2",
+      "files": [
+        "apps/web-v2/src/components/trade/trade-form.tsx",
+        "apps/web-v2/src/components/trade/positions-panel.tsx"
+      ],
+      "acceptance_criteria": [
+        "For EQUITY, direction labels are Long/Short (no \"(Calls)/(Puts)\")",
+        "Options keep explicit Call/Put"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "T13",
+      "doc_row": 13,
+      "doc_task_text": "Rename site from TradeBot to ReadySetTrade",
+      "title": "Rename TradeBot -> Ready Set Trade",
+      "category": "ui-global",
+      "priority": "P1",
+      "classification": "DONE",
+      "status": "done",
+      "owner_group": null,
+      "files": [
+        "apps/web-v2/src/app/layout.tsx",
+        "apps/web-v2/src/app/page.tsx"
+      ],
+      "acceptance_criteria": [
+        "Header + tab title say Ready Set Trade"
+      ],
+      "verify": [],
+      "notes": "Done this session. [committed e174d48; doc: DONE by mining helium]"
+    },
+    {
+      "id": "T14",
+      "doc_row": 14,
+      "doc_task_text": "When i click on my account ID on the top right under Account Summary, it should take me to alpaca dashboard",
+      "title": "Account ID links to Alpaca dashboard",
+      "category": "positions",
+      "priority": "P0",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G1",
+      "files": [
+        "apps/web-v2/src/components/trade/positions-panel.tsx"
+      ],
+      "acceptance_criteria": [
+        "Clicking the account ID opens https://app.alpaca.markets/dashboard/overview in a new tab"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "Quick-win (Wave 1). [committed 02e1184; doc: DONE by mining helium]"
+    },
+    {
+      "id": "T15",
+      "doc_row": 15,
+      "doc_task_text": "add these people to twitter list ... drop down ... filter to who you want to see in the feed",
+      "title": "Twitter list + feed filter dropdown",
+      "category": "feed",
+      "priority": "P2",
+      "classification": "NEEDS-USER-INPUT",
+      "status": "blocked",
+      "owner_group": null,
+      "files": [
+        "apps/api/src/routers/signals.ts",
+        "apps/web-v2/src/components/feed/signal-feed.tsx"
+      ],
+      "acceptance_criteria": [
+        "Filter feed by author; 'all' option"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "BLOCKED: need the list of Twitter handles (Discord link) + how the list is managed."
+    },
+    {
+      "id": "T16",
+      "doc_row": 16,
+      "doc_task_text": "When someone makes a tweet on a symbol, we need to save that in the database and then graph it on the chart",
+      "title": "Tweet bubbles on the chart",
+      "category": "feed",
+      "priority": "P2",
+      "classification": "NEEDS-USER-INPUT",
+      "status": "blocked",
+      "owner_group": null,
+      "files": [
+        "apps/web-v2/src/components/charts/tradingview-chart.tsx",
+        "packages/db/src/schema/signals.ts"
+      ],
+      "acceptance_criteria": [
+        "Tweets stored; chart shows bubble w/ avatar; hover/click shows tweet"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "BLOCKED: user wants an example; TradingView embed has no marker layer -> likely switch to lightweight-charts/overlay. ASK USER."
+    },
+    {
+      "id": "T17",
+      "doc_row": 17,
+      "doc_task_text": "Whenever you hover over a button or a link, it needs a cursor:pointer css class",
+      "title": "cursor:pointer on all buttons/links",
+      "category": "ui-global",
+      "priority": "P0",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G6",
+      "files": [
+        "apps/web-v2/src/components/ui/button.tsx",
+        "apps/web-v2/src/app/globals.css"
+      ],
+      "acceptance_criteria": [
+        "All buttons and links show cursor:pointer on hover"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "Quick-win (Wave 1). [committed 7e39458; doc: DONE by mining helium]"
+    },
+    {
+      "id": "T18",
+      "doc_row": 18,
+      "doc_task_text": "Community deals doesnt make sense. Rename this ... Rename live signals to X Signals ... use a randomized avatar / name",
+      "title": "Rename/move feeds + stop leaking user data (privacy)",
+      "category": "social",
+      "priority": "P1",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G3/G4/G7",
+      "files": [
+        "apps/web-v2/src/app/page.tsx",
+        "apps/web-v2/src/components/feed/signal-feed.tsx",
+        "apps/web-v2/src/components/social/social-feed-panel.tsx",
+        "apps/api/src/routers/social.ts"
+      ],
+      "acceptance_criteria": [
+        "'Live Signals' renamed to 'X Signals' (T18a/G4)",
+        "'Community Deals' removed as a tab, shown as a card under signals (T18c/G3)",
+        "Social feed uses a DETERMINISTIC pseudonym + random avatar (DiceBear) instead of real name/image (T18b/G7)"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "PRIVACY bug. Parent done only when T18a+T18b+T18c verified. [committed cf302e5; doc: DONE by mining helium]"
+    },
+    {
+      "id": "T19",
+      "doc_row": 19,
+      "doc_task_text": "See if you can pull the PNL graph that alpaca has, and show on our site",
+      "title": "Show Alpaca PNL graph",
+      "category": "positions",
+      "priority": "P3",
+      "classification": "NEEDS-USER-INPUT",
+      "status": "blocked",
+      "owner_group": null,
+      "files": [
+        "apps/api/src/routers/positions.ts",
+        "apps/web-v2/src/components/charts"
+      ],
+      "acceptance_criteria": [
+        "Portfolio P&L history charted on the site"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "BLOCKED: confirm desired data/format (Alpaca portfolio-history API)."
+    },
+    {
+      "id": "T20",
+      "doc_row": 20,
+      "doc_task_text": "For all ongoing and closed trades - need to be able to generate a PNL image",
+      "title": "Generate PNL image for trades",
+      "category": "positions",
+      "priority": "P3",
+      "classification": "NEEDS-USER-INPUT",
+      "status": "blocked",
+      "owner_group": null,
+      "files": [
+        "apps/web-v2/src/components/trade/positions-panel.tsx"
+      ],
+      "acceptance_criteria": [
+        "Shareable P&L image generated per trade"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "BLOCKED: user said they'll provide code."
+    },
+    {
+      "id": "T21",
+      "doc_row": 21,
+      "doc_task_text": "BAD UI/UX Manage exits does not make sense ... set the TP levels all from the main trade page ... COMPACT and SLEEK",
+      "title": "Move TP levels onto main trade page (kill Manage Exits)",
+      "category": "exits",
+      "priority": "P2",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G2/G3",
+      "files": [
+        "apps/web-v2/src/app/page.tsx",
+        "apps/web-v2/src/components/trade/trade-form.tsx",
+        "apps/web-v2/src/components/trade/multi-tp-exit-strategy.tsx"
+      ],
+      "acceptance_criteria": [
+        "TP levels settable from the main trade page",
+        "'Manage Exits' tab removed",
+        "Compact/sleek layout"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "G2 builds in-page TP before G3 removes the tab."
+    },
+    {
+      "id": "T22",
+      "doc_row": 22,
+      "doc_task_text": "We dont need Place Trade Execute orders via Alpaca on top",
+      "title": "Remove 'Execute orders via Alpaca' header text",
+      "category": "trading",
+      "priority": "P0",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G2",
+      "files": [
+        "apps/web-v2/src/components/trade/trade-form.tsx"
+      ],
+      "acceptance_criteria": [
+        "The 'Execute orders via Alpaca' description line is removed/simplified"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "Quick-win (Wave 1). [committed 01f9ec1; doc: DONE by mining helium]"
+    },
+    {
+      "id": "T23",
+      "doc_row": 23,
+      "doc_task_text": "BAD UI/UX I submitted orders and got errors. All it said in red was read ECONNRESET or Connection Closed",
+      "title": "Friendly connection-error messages",
+      "category": "errors",
+      "priority": "P1",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G5",
+      "files": [
+        "apps/api/src/middleware/errorHandler.ts",
+        "apps/web-v2/src/components/trade/trade-form.tsx"
+      ],
+      "acceptance_criteria": [
+        "ECONNRESET/Connection Closed -> friendly 'try again later / contact team'",
+        "uses catchError"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "Sequence before T08 (shared error surfacing)."
+    },
+    {
+      "id": "T24",
+      "doc_row": 24,
+      "doc_task_text": "BAD UI/UX In the open orders - the cancel all and the cancel need a modal popup to confirm",
+      "title": "Confirm modal on Cancel / Cancel-all",
+      "category": "errors",
+      "priority": "P1",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G5",
+      "files": [
+        "apps/web-v2/src/components/trade/open-orders-panel.tsx"
+      ],
+      "acceptance_criteria": [
+        "Cancel and Cancel-all show a confirm modal before mutating"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "Reuse AlertDialog."
+    },
+    {
+      "id": "T25",
+      "doc_row": 25,
+      "doc_task_text": "When i submit an order .. make sure open orders gets refreshed a few seconds later",
+      "title": "Refresh open orders shortly after submit",
+      "category": "errors",
+      "priority": "P1",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": "G5",
+      "files": [
+        "apps/web-v2/src/components/trade/open-orders-panel.tsx",
+        "apps/web-v2/src/components/trade/trade-form.tsx"
+      ],
+      "acceptance_criteria": [
+        "Open orders refetch a few seconds after a submit"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "Already invalidates on submit; add a delayed refetch."
+    },
+    {
+      "id": "T26",
+      "doc_row": 26,
+      "doc_task_text": "BUG I dont understand the math / relationship between these 3 fields",
+      "title": "Clarify/verify Max Risk / Stop / Quantity math",
+      "category": "trading",
+      "priority": "P2",
+      "classification": "CODEABLE-NOW",
+      "status": "done",
+      "owner_group": null,
+      "files": [
+        "apps/web-v2/src/components/trade/trade-form.tsx"
+      ],
+      "acceptance_criteria": [
+        "The 3 fields' relationship is correct + explained (tooltips)"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "BLOCKED: need the exact intended formula."
+    },
+    {
+      "id": "T27",
+      "doc_row": null,
+      "doc_task_text": "Pull from signa api.. Put it as a feed on the sidebar ... tiers ... watchlist",
+      "title": "Signal-API feed + tiers + watchlist",
+      "category": "feed",
+      "priority": "P3",
+      "classification": "NEEDS-USER-INPUT",
+      "status": "blocked",
+      "owner_group": null,
+      "files": [
+        "apps/web-v2/src/components/feed/signal-feed.tsx",
+        "apps/api/src/routers/signals.ts"
+      ],
+      "acceptance_criteria": [
+        "Signal-API feed on sidebar",
+        "Tier button -> analysis",
+        "Stock watchlist CRUD"
+      ],
+      "verify": [
+        "typecheck",
+        "build",
+        "visual"
+      ],
+      "notes": "BLOCKED: freeform note (below table). Need signal-API source + tier definitions."
+    },
+    {
+      "id": "T28",
+      "doc_row": null,
+      "doc_task_text": "in Whop You can make it so people can self sign up as an affiliate",
+      "title": "Whop affiliate self-signup + discount codes",
+      "category": "growth",
+      "priority": "P3",
+      "classification": "NON-CODE",
+      "status": "blocked",
+      "owner_group": null,
+      "files": [],
+      "acceptance_criteria": [],
+      "verify": [],
+      "notes": "NON-CODE: business/Whop config."
+    },
+    {
+      "id": "T29",
+      "doc_row": null,
+      "doc_task_text": "Need a Twitter and proper landing page",
+      "title": "Twitter + landing page",
+      "category": "growth",
+      "priority": "P2",
+      "classification": "NON-CODE",
+      "status": "blocked",
+      "owner_group": null,
+      "files": [],
+      "acceptance_criteria": [],
+      "verify": [],
+      "notes": "NON-CODE/marketing (landing page could be a later code task)."
+    },
+    {
+      "id": "T30",
+      "doc_row": null,
+      "doc_task_text": "Meta ads and Google ads mcp",
+      "title": "Meta + Google ads MCP",
+      "category": "growth",
+      "priority": "P3",
+      "classification": "NON-CODE",
+      "status": "blocked",
+      "owner_group": null,
+      "files": [],
+      "acceptance_criteria": [],
+      "verify": [],
+      "notes": "NON-CODE."
+    },
+    {
+      "id": "T31",
+      "doc_row": null,
+      "doc_task_text": "Add in more APIs from other brokers",
+      "title": "Add more broker APIs",
+      "category": "infra",
+      "priority": "P3",
+      "classification": "NON-CODE",
+      "status": "blocked",
+      "owner_group": null,
+      "files": [
+        "packages/alpaca"
+      ],
+      "acceptance_criteria": [],
+      "verify": [],
+      "notes": "NEEDS-INPUT/NON-CODE: which brokers (match what 'shardi' supports)."
+    }
+  ]
+}
